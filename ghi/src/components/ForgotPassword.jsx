@@ -1,13 +1,42 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const ForgotPassword = () => {
   const [username, setUsername] = useState("");
+  const [errorMesssage, setErrorMessage] = useState("");
+  const Navigate = useNavigate();
+  const [accounts, setAccounts] = useState([]);
 
-  const handleSubmit = (e) => {
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch(`http://localhost:8000/api/accounts/`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setAccounts(data.accounts);
+      }
+    };
+    getData();
+  }, []);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: handle forgot password logic here
-    console.log(`Forgot password for username: ${username}`);
+    if (!username) {
+      return;
+    }
+
+    try {
+      const allAccounts = accounts.map((account) => account.username);
+      if (allAccounts.includes(username)) {
+        Navigate("/password_reset");
+        setErrorMessage("Reset");
+      } else {
+        setErrorMessage("Username does not exist");
+      }
+    } catch (error) {
+      console.error(error);
+      setErrorMessage("Error occurred, please try again later");
+    }
   };
 
   return (
@@ -39,15 +68,13 @@ const ForgotPassword = () => {
                     />
                   </div>
 
-                  <Link to="/password_reset">
-                    <button
-                      className="btn btn-outline-light btn-lg px-5"
-                      type="submit"
-                      onClick={handleSubmit}
-                    >
-                      Reset Password
-                    </button>
-                  </Link>
+                  <button
+                    className="btn btn-outline-light btn-lg px-5"
+                    type="submit"
+                    onClick={handleSubmit}
+                  >
+                    Reset Password
+                  </button>
                 </div>
                 <div>
                   <p className="mb-0">

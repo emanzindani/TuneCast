@@ -67,8 +67,8 @@ const LoginForm = () => {
               Login
             </button>
           </div>
-          {/* <div>
-            <p className="mb-2">
+          <div>
+            <p className="mb-0">
               <Link to="/forgot_password" className="text-white-50 fw-bold">
                 Forgot Password?
               </Link>
@@ -80,7 +80,7 @@ const LoginForm = () => {
                 <SignupModal />
               </Link>
             </p>
-          </div> */}
+          </div>
         </Modal.Body>
       </Modal>
     </>
