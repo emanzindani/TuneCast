@@ -13,8 +13,7 @@ const LoginForm = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [showLoginModal, setShowLoginModal] = useState(false);
-  const [showSignupModal, setShowSignupModal] = useState(false);
+
 
   const handleSubmit = (e) => {
     e.preventDefault();

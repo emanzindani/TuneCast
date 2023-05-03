@@ -125,7 +125,7 @@ const MainPage = () => {
       };
       getSpotifyPlaylists();
     }
-  }, [currentWeather]);
+  }, [currentWeather, accessToken]);
 
   useEffect(() => {
     (async () => {
@@ -158,7 +158,7 @@ const MainPage = () => {
         return;
       }
     })();
-  }, [currentPlaylist]);
+  }, [currentPlaylist, currentWeather,fetchWithToken, token]);
 
   makeItRain();
 
