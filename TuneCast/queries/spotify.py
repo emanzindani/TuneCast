@@ -1,6 +1,5 @@
 import requests
 import os
-import json
 import base64
 
 
@@ -39,6 +38,6 @@ class SpotifyRepo:
         )
         try:
             return search_resp.json()
-        except:
+        except (KeyError):
             print("*****************PLAYLIST RESPONSE ERROR")
             return None

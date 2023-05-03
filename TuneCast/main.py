@@ -1,7 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
-from spotipy.oauth2 import SpotifyOAuth
 import os
 from authenticator import authenticator
 from routers import accounts, history, weather_api, location, spotify

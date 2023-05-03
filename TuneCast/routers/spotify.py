@@ -1,7 +1,4 @@
 from fastapi import APIRouter, Depends
-from fastapi.responses import RedirectResponse
-import os
-from spotipy.oauth2 import SpotifyOAuth
 from queries.spotify import SpotifyRepo
 
 router = APIRouter()
