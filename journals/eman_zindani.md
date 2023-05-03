@@ -25,7 +25,7 @@ finished frontend authentication today
 worked on creating weather dropdown and got spotify playlist on the mainpage
 
 ### 04/17/23
-worked on creating unit tests
+worked on creating unit tests!!
 
 ### 04/18/23
 implemented weather API on main page
