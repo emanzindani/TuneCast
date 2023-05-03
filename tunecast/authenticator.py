@@ -7,7 +7,7 @@ from models import AccountOut, AccountOutWithHashedPassword
 
 SIGNING_KEY = os.environ.get("SIGNING_KEY", "")
 
-# authenticator
+
 class MyAuthenticator(Authenticator):
     async def get_account_data(
         self,
