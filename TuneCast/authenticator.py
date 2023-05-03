@@ -4,7 +4,10 @@ from jwtdown_fastapi.authentication import Authenticator
 from queries.accounts import AccountsRepo
 from models import AccountOut, AccountOutWithHashedPassword
 
+
 SIGNING_KEY = os.environ["SIGNING_KEY"]
+
+
 class MyAuthenticator(Authenticator):
     async def get_account_data(
         self,
