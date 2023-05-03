@@ -1,12 +1,14 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { register } = useToken();
+  const navigate = useNavigate();
   const accountData = {
     username: username,
     password: password,

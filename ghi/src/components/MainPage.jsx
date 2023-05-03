@@ -194,10 +194,10 @@ const MainPage = () => {
               width="80"
               height="80"
               className="d-inline-block align-top"
-              alt="TuneCast"
+              alt="tunecast"
             />
           </Link>
-          TuneCast
+          tunecast
         </h1>
         <div className="col-lg-6 mx-auto" style={{ width: "90%" }}>
           <p className="lead mb-4">Weather-Based Playlist Generator!</p>
