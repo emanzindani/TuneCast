@@ -33,9 +33,9 @@ function HistoryList() {
         `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/history/${historyId}/`,
         "DELETE"
       );
-      if (resp) {
-        const data = await resp;
-      }
+      // if (resp) {
+      //   const data = await resp;
+      // }
     }
   };
 

@@ -1,7 +1,7 @@
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+
 
 const Signup = () => {
   const [username, setUsername] = useState("");
