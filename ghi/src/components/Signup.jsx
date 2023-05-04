@@ -22,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     register(
       accountData,
-      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/`
     );
     navigate("/");
   };

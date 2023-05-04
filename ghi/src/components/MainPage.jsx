@@ -58,7 +58,7 @@ const MainPage = () => {
     async function success(pos) {
       const crd = pos.coords;
 
-      const locationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/open_weather_api/${crd.longitude}_${crd.latitude}`;
+      const locationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/open_weather_api/${crd.longitude}_${crd.latitude}/`;
       const response = await fetch(locationUrl);
       if (response.ok) {
         const data = await response.json();
@@ -69,7 +69,7 @@ const MainPage = () => {
         }
       }
 
-      const currentLocationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/location/${crd.longitude}_${crd.latitude}`;
+      const currentLocationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/location/${crd.longitude}_${crd.latitude}/`;
       const currentLocationresponse = await fetch(currentLocationUrl);
       if (currentLocationresponse.ok) {
         const currentLocationData = await currentLocationresponse.json();
