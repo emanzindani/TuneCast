@@ -19,7 +19,7 @@ worked on creating endpoints for history and started to add authentication to it
 added authentication to history endpoints, created playlist endpoints, finished weather endpoints. Backend is working!!!!!
 
 ### 04/06/23
-finished frontend authentication today
+finished frontend authentication today!
 
 ### 04/13/23
 worked on creating weather dropdown and got spotify playlist on the mainpage
