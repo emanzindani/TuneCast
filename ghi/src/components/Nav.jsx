@@ -22,6 +22,7 @@ function Nav() {
       style={{
         backgroundColor: "rgba(252, 252, 252, 0.4)",
         padding: 0,
+        zIndex: 10
       }}
     >
       <NavLink

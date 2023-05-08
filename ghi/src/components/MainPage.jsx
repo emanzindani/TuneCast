@@ -2,8 +2,13 @@ import React, { useState, useEffect } from "react";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import { Link } from "react-router-dom";
 import { stateList } from "./StateList.jsx";
-import { makeItRain } from "./rain.js";
 import imageContent from "./music-cloud.png";
+import Snowfall from 'react-snowfall'
+import * as klouds from "klouds";
+import { makeItRain } from './rain.js'
+
+
+
 
 const MainPage = () => {
   const [currentPlaylist, setCurrentPlaylist] = useState("");
@@ -12,7 +17,12 @@ const MainPage = () => {
   const [currentLocation, setCurrentLocation] = useState();
   const [accessToken, setAccessToken] = useState("");
   const [currentWeather, setCurrentWeather] = useState("");
+  const [cloudSpeed, setCloudSpeed] = useState(0)
   const { token, fetchWithToken } = useToken();
+  const [cloud1Color, setCloud1Color] = useState("#cdcece")
+  const [cloud2Color, setCloud2Color] = useState("#ffffff")
+  const [cloudBgColor, setCloudBgColor] = useState("#aee9f7")
+
 
   function RandomNum(num) {
     if (num > 10) {
@@ -43,7 +53,32 @@ const MainPage = () => {
         city: currentCity.toUpperCase(),
         principalSubdivisionCode: currentStateAbr,
       };
-      setCurrentWeather(data["weather"][0]["main"]);
+      const weatherResult = data["weather"][0]["main"]
+      if (weatherResult === "Clear"){
+        setCurrentWeather("Sunny");
+        setCloudSpeed(1)
+        setCloud1Color('#cdcece')
+        setCloud2Color('#ffffff')
+      } else if (weatherResult === "Clouds"){
+        setCurrentWeather("Cloudy");
+        setCloudSpeed(3)
+        setCloud1Color('#474849')
+        setCloud2Color('#838383')
+      } else if (weatherResult === "Thunderstorm"){
+        setCurrentWeather("Stormy");
+      } else if (weatherResult === "Drizzle" || weatherResult === "Rain"){
+        setCurrentWeather("Rainy");
+        setCloudSpeed(5)
+        setCloud1Color('#474849')
+        setCloud2Color('#838383')
+      } else if (weatherResult === "Snow"){
+        setCurrentWeather("Snowy");
+        setCloudSpeed(-1)
+        setCloud1Color('#cdcece')
+        setCloud2Color('#ffffff')
+      } else {
+        setCurrentWeather("");
+      }
       setCurrentLocation(location);
     }
   };
@@ -62,10 +97,31 @@ const MainPage = () => {
       const response = await fetch(locationUrl);
       if (response.ok) {
         const data = await response.json();
-        if (data["weather"][0]["main"] === "Clear"){
+        const weatherResult = data["weather"][0]["main"]
+        if (weatherResult === "Clear"){
           setCurrentWeather("Sunny");
+          setCloudSpeed(1)
+          setCloud1Color('#cdcece')
+          setCloud2Color('#ffffff')
+        } else if (weatherResult === "Clouds"){
+          setCurrentWeather("Cloudy");
+          setCloudSpeed(3)
+          setCloud1Color('#474849')
+          setCloud2Color('#838383')
+        } else if (weatherResult === "Thunderstorm"){
+          setCurrentWeather("Stormy");
+        } else if (weatherResult === "Drizzle" || weatherResult === "Rain"){
+          setCurrentWeather("Rainy");
+          setCloudSpeed(5)
+          setCloud1Color('#474849')
+          setCloud2Color('#838383')
+        } else if (weatherResult === "Snow"){
+          setCurrentWeather("Snowy");
+          setCloudSpeed(-1)
+          setCloud1Color('#cdcece')
+          setCloud2Color('#ffffff')
         } else {
-          setCurrentWeather("Rainy")
+          setCurrentWeather("");
         }
       }
 
@@ -103,6 +159,35 @@ const MainPage = () => {
     };
     getSpotifyToken();
   }, []);
+
+  useEffect((e) => {
+    //  klouds.create({
+    //     selector: '#my-canvas1',
+    //     layerCount: 5,
+    //     speed: cloudSpeed,
+    //     cloudColor1: '#cdcece',
+    //     cloudColor2: '#ffffff',
+    //     bgColor: '#aee9f7'
+    // })
+
+
+    klouds.create({
+        selector: '#my-canvas1',
+        layerCount: 5,
+        speed: cloudSpeed,
+        cloudColor1: cloud1Color,
+        cloudColor2: cloud2Color,
+        bgColor: cloudBgColor
+    })
+    klouds.create({
+        selector: '#my-canvas2',
+        layerCount: 5,
+        speed: cloudSpeed,
+        cloudColor1: cloud1Color,
+        cloudColor2: cloud2Color,
+        bgColor: cloudBgColor
+    })
+  }, [cloudSpeed]);
 
   useEffect(() => {
     if (currentWeather !== "") {
@@ -158,13 +243,80 @@ const MainPage = () => {
         return;
       }
     })();
-  }, [currentPlaylist]);
+  }, [currentPlaylist, fetchWithToken, token, currentWeather]);
 
   makeItRain();
 
+
+
+  // Weather Selector
+
+  const weatherSelector = (e) => {
+    e.preventDefault()
+    let weather = e.target.value
+    setCurrentWeather(weather)
+    if (weather === "Sunny"){
+          setCloudSpeed(1)
+          setCloud1Color('#cdcece')
+          setCloud2Color('#ffffff')
+        } else if (weather === "Cloudy"){
+          setCloudSpeed(3)
+          setCloud1Color('#474849')
+          setCloud2Color('#838383')
+        } else if (weather === "Rainy"){
+          setCloudSpeed(5)
+          setCloud1Color('#474849')
+          setCloud2Color('#838383')
+        } else if (weather === "Snowy"){
+          setCloudSpeed(-1)
+          setCloud1Color('#cdcece')
+          setCloud2Color('#ffffff')
+        }
+  }
+
+  const cloudSpeedInput = (e) => {
+    e.preventDefault()
+    setCloudSpeed(e.target.value)
+    console.log(e.target.value)
+  }
+
+
   return (
     <>
-      {currentWeather === "Clear" && (
+      <canvas id="my-canvas1"></canvas>
+      <canvas id="my-canvas2"></canvas>
+
+      <div id="bottom-background"></div>
+
+      <div className="input-group mb-3 d-flex justify-content-end">
+        <select
+        onChange={weatherSelector}
+        className="form-control border border-dark"
+        id="inputGroupSelect01"
+        style={{
+                  backgroundColor: "rgba(252, 252, 252, 0)",
+                  width: "5vw",
+                  position: "fixed"
+                }}
+        >
+          <option defaultValue>Weather</option>
+          <option value="Sunny">Sun</option>
+          <option value="Rainy">Rain</option>
+          <option value="Snowy">Snow</option>
+          <option value="Cloudy">Cloudy</option>
+        </select>
+      </div>
+
+      <input
+              onChange={cloudSpeedInput}
+              type="range"
+              className="form-range"
+              min="-20"
+              max="20"
+              id="customRange2"
+              ></input>
+
+      {currentWeather === "Sunny" && (
         <div id="sun">
           <div id="rings">
             <div></div>
@@ -175,11 +327,19 @@ const MainPage = () => {
         </div>
       )}
 
-      {currentWeather !== "" && currentWeather !== "Clear" && (
-        <div className="rain front-row"></div>
+      {currentWeather === "Rainy" && (
+        <div id="rain-container">
+          <div className="rain front-row"></div>
+          <div className="rain back-row"></div>
+        </div>
       )}
-      <div className="rain back-row"></div>
+
+      {currentWeather === "Snowy" && (
+        <Snowfall />
+      )}
+
       <div
+        id="player-card"
         className="card mb-3 px-4 py-5 my-5 text-center shadow"
         style={{
           width: "50vw",
@@ -187,6 +347,8 @@ const MainPage = () => {
           backgroundColor: "rgba(252, 252, 252, 0.4)",
         }}
       >
+
+
         <h1 className="display-5 fw-bold">
           <Link className="navbar-brand" href="#">
             <img
@@ -279,6 +441,7 @@ const MainPage = () => {
           </div>
         </div>
       </div>
+
     </>
   );
 };

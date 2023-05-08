@@ -1,6 +1,5 @@
 import requests
 import os
-import json
 import base64
 
 
@@ -28,7 +27,7 @@ class SpotifyRepo:
     def get_playlist(self, token: str, weather: str):
         search_url = "https://api.spotify.com/v1/search"
         search_params = {
-            "q": f"{weather}%20rock",
+            "q": f"{weather}",
             "type": ["playlist"],
             "market": "US",
             "limit": 10,
@@ -39,6 +38,6 @@ class SpotifyRepo:
         )
         try:
             return search_resp.json()
-        except:
+        except (KeyError):
             print("*****************PLAYLIST RESPONSE ERROR")
             return None

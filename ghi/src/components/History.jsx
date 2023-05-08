@@ -35,6 +35,7 @@ function HistoryList() {
       );
       if (resp) {
         const data = await resp;
+        return data
       }
     }
   };
