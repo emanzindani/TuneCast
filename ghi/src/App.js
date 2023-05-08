@@ -6,8 +6,8 @@ import Signup from "./components/Signup";
 import { AuthProvider } from "@galvanize-inc/jwtdown-for-react";
 import "./App.css";
 import Nav from "./components/Nav";
-import ForgotPassword from "./components/ForgotPassword";
-import PasswordReset from "./components/PasswordReset";
+// import ForgotPassword from "./components/ForgotPassword";
+// import PasswordReset from "./components/PasswordReset";
 
 function App() {
   const domain = /https:\/\/[^/]+/;
@@ -21,7 +21,7 @@ function App() {
           <Route exact path="/login" element={<LoginForm />}></Route>
           <Route exact path="/history" element={<HistoryList />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
-          <Route
+          {/* <Route
             exact
             path="/forgot_password"
             element={<ForgotPassword />}
@@ -30,7 +30,7 @@ function App() {
             exact
             path="/password_reset"
             element={<PasswordReset />}
-          ></Route>
+          ></Route> */}
         </Routes>
       </AuthProvider>
     </BrowserRouter>

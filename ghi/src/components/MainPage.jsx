@@ -158,6 +158,7 @@ const MainPage = () => {
       }
     };
     getSpotifyToken();
+    setCloudBgColor("#aee9f7");
   }, []);
 
   useEffect((e) => {
@@ -187,7 +188,7 @@ const MainPage = () => {
         cloudColor2: cloud2Color,
         bgColor: cloudBgColor
     })
-  }, [cloudSpeed]);
+  }, [cloudSpeed, cloud1Color, cloud2Color, cloudBgColor]);
 
   useEffect(() => {
     if (currentWeather !== "") {
@@ -359,7 +360,7 @@ const MainPage = () => {
               alt="tunecast"
             />
           </Link>
-          tunecast
+          TuneCast
         </h1>
         <div className="col-lg-6 mx-auto" style={{ width: "90%" }}>
           <p className="lead mb-4">Weather-Based Playlist Generator!</p>
