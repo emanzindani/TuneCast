@@ -7,9 +7,9 @@ class SpotifyRepo:
     def get_token(self):
         profile_url = "https://accounts.spotify.com/api/token"
         request_string = (
-            os.environ["SPOTIPY_CLIENT_ID"]
+            os.environ.get("SPOTIPY_CLIENT_ID", "")
             + ":"
-            + os.environ["SPOTIPY_CLIENT_SECRET"]
+            + os.environ.get("SPOTIPY_CLIENT_SECRET", "")
         )
         encoded_bytes = base64.b64encode(request_string.encode("utf-8"))
         encoded_string = str(encoded_bytes, "utf-8")

@@ -5,6 +5,9 @@ from queries.accounts import AccountsRepo
 from models import AccountOut, AccountOutWithHashedPassword
 
 
+SIGNING_KEY = os.environ.get("SIGNING_KEY", "")
+
+
 class MyAuthenticator(Authenticator):
     async def get_account_data(
         self,
@@ -26,4 +29,4 @@ class MyAuthenticator(Authenticator):
         return account.username, AccountOut(**account.dict())
 
 
-authenticator = MyAuthenticator(os.environ["SIGNING_KEY"])
+authenticator = MyAuthenticator(SIGNING_KEY)

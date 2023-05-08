@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from main import app
 from queries.location import LocationRepo
-from models import Location
+
 
 client = TestClient(app)
 

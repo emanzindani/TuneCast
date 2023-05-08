@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
 
+
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,7 +22,7 @@ const Signup = () => {
     e.preventDefault();
     register(
       accountData,
-      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts`
+      `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/accounts/`
     );
     navigate("/");
   };

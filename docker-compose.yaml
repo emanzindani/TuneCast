@@ -21,12 +21,12 @@ services:
       ME_CONFIG_MONGODB_URL: mongodb://admin:password@mongo:27017/
   fastapi:
     build:
-      context: TuneCast
+      context: tunecast
       dockerfile: Dockerfile.dev
     ports:
       - 8000:8000
     volumes:
-      - ./TuneCast:/app
+      - ./tunecast:/app
     environment:
       SIGNING_KEY: ${SIGNING_KEY}
       MONGO_URL: mongodb://admin:password@mongo

@@ -2,7 +2,7 @@ import requests
 import os
 import json
 
-OPEN_WEATHER_API_KEY = os.environ["OPEN_WEATHER_API_KEY"]
+OPEN_WEATHER_API_KEY = os.environ.get("OPEN_WEATHER_API_KEY", "")
 
 
 class OpenWeatherRepo:

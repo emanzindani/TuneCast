@@ -93,7 +93,7 @@ const MainPage = () => {
     async function success(pos) {
       const crd = pos.coords;
 
-      const locationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/open_weather_api/${crd.longitude}_${crd.latitude}`;
+      const locationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/open_weather_api/${crd.longitude}_${crd.latitude}/`;
       const response = await fetch(locationUrl);
       if (response.ok) {
         const data = await response.json();
@@ -125,7 +125,7 @@ const MainPage = () => {
         }
       }
 
-      const currentLocationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/location/${crd.longitude}_${crd.latitude}`;
+      const currentLocationUrl = `${process.env.REACT_APP_USER_SERVICE_API_HOST}/api/location/${crd.longitude}_${crd.latitude}/`;
       const currentLocationresponse = await fetch(currentLocationUrl);
       if (currentLocationresponse.ok) {
         const currentLocationData = await currentLocationresponse.json();
@@ -210,7 +210,7 @@ const MainPage = () => {
       };
       getSpotifyPlaylists();
     }
-  }, [currentWeather]);
+  }, [currentWeather, accessToken]);
 
   useEffect(() => {
     (async () => {
@@ -243,7 +243,7 @@ const MainPage = () => {
         return;
       }
     })();
-  }, [currentPlaylist, fetchWithToken, token, currentWeather]);
+  }, [currentPlaylist, currentWeather,fetchWithToken, token]);
 
   makeItRain();
 
@@ -356,10 +356,10 @@ const MainPage = () => {
               width="80"
               height="80"
               className="d-inline-block align-top"
-              alt="TuneCast"
+              alt="tunecast"
             />
           </Link>
-          TuneCast
+          tunecast
         </h1>
         <div className="col-lg-6 mx-auto" style={{ width: "90%" }}>
           <p className="lead mb-4">Weather-Based Playlist Generator!</p>

@@ -1,11 +1,10 @@
 import { NavLink } from "react-router-dom";
 import useToken from "@galvanize-inc/jwtdown-for-react";
 import HistoryModal from "./Modals/HistoryModal";
-import SignupModal from "./Modals/SignupModal";
-import ForgotPasswordModal from "./ForgotPassword";
 import LoginForm from "./LoginForm";
 import Signup from "./Signup";
 import imageContent from "./music-cloud.png";
+
 
 function Nav() {
   const { token } = useToken();
@@ -37,7 +36,7 @@ function Nav() {
           width="40"
           height="40"
           className="d-inline-block align-top"
-          alt="TuneCast"
+          alt="tunecast"
         />
       </NavLink>
       <button
