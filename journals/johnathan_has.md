@@ -53,3 +53,5 @@ We implemented a geolocation API so that the user could just click the button an
 ## 4/27/23
 
 We were playing around with stylization on the main page. We added borders to buttons and inputs, added a default text inside the input box asking for the user to input a city, and played around with putting an image in the background.
+
+##
